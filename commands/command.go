@@ -23,9 +23,10 @@ import (
 )
 
 var (
-	ConfigurationFile = "./conf/app.conf"
-	WorkingDirectory  = "./"
-	LogFile           = "./logs"
+	WorkingDirectory, _ = os.Getwd()
+
+	ConfigurationFile = WorkingDirectory + "/conf/app.conf"
+	LogFile           = WorkingDirectory + "/logs"
 )
 
 // RegisterDataBase 注册数据库
@@ -225,6 +226,7 @@ func RegisterFunction() {
 }
 
 func ResolveCommand(args []string) {
+
 	flagSet := flag.NewFlagSet("MinDoc command: ", flag.ExitOnError)
 	flagSet.StringVar(&ConfigurationFile, "config", "", "MinDoc configuration file.")
 	flagSet.StringVar(&WorkingDirectory, "dir", "", "MinDoc working directory.")
@@ -233,9 +235,7 @@ func ResolveCommand(args []string) {
 	flagSet.Parse(args)
 
 	if WorkingDirectory == "" {
-		if p, err := filepath.Abs(os.Args[0]); err == nil {
-			WorkingDirectory = filepath.Dir(p)
-		}
+		WorkingDirectory, _ = os.Getwd()
 	}
 	if LogFile == "" {
 		LogFile = filepath.Join(WorkingDirectory, "logs")
@@ -247,10 +247,9 @@ func ResolveCommand(args []string) {
 			utils.CopyFile(ConfigurationFile, config)
 		}
 	}
+
 	gocaptcha.ReadFonts(filepath.Join(WorkingDirectory, "static", "fonts"), ".ttf")
-
 	err := beego.LoadAppConfig("ini", ConfigurationFile)
-
 	if err != nil {
 		log.Println("An error occurred:", err)
 		os.Exit(1)
@@ -277,11 +276,6 @@ func ResolveCommand(args []string) {
 }
 
 func init() {
-
 	gocaptcha.ReadFonts("./static/fonts", ".ttf")
 	gob.Register(models.Member{})
-
-	if p, err := filepath.Abs(os.Args[0]); err == nil {
-		WorkingDirectory = filepath.Dir(p)
-	}
 }

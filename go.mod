@@ -10,7 +10,6 @@ require (
 	github.com/TruthHun/gotil v0.0.0-20191003091818-17b80aad8a45
 	github.com/TruthHun/html2article v0.0.0-20180202140721-67d6ff09647b
 	github.com/TruthHun/html2json v0.0.0-20191003085735-6ba0884c8c03
-	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
 	github.com/alexcesaro/mail v0.0.0-20141015155039-29068ce49a17
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.0+incompatible
 	github.com/andybalholm/cascadia v1.1.0 // indirect
@@ -20,8 +19,6 @@ require (
 	github.com/boombuler/barcode v1.0.0
 	github.com/disintegration/imaging v1.6.1
 	github.com/go-sql-driver/mysql v1.5.0
-	github.com/huichen/sego v0.0.0-20180617034105-3f3c8a8cfacc
-	github.com/issue9/assert v1.3.4 // indirect
 	github.com/kardianos/service v1.0.0
 	github.com/lifei6671/gocaptcha v0.0.0-20190301083731-c467a25bc100
 	github.com/mssola/user_agent v0.5.0

@@ -658,7 +658,7 @@ func (this *DocumentController) Upload() {
 	}
 
 	bookId := 0
-	//如果是超级管理员，则不判断权限
+	// 如果是超级管理员，则不判断权限
 	if this.Member.IsAdministrator() {
 		book, err := models.NewBook().FindByFieldFirst("identify", identify)
 		if err != nil {
@@ -674,7 +674,7 @@ func (this *DocumentController) Upload() {
 			}
 			this.JsonResult(6001, err.Error())
 		}
-		//如果没有编辑权限
+		// 如果没有编辑权限
 		if book.RoleId != conf.BookEditor && book.RoleId != conf.BookAdmin && book.RoleId != conf.BookFounder {
 			this.JsonResult(6006, "权限不足")
 		}
@@ -700,7 +700,6 @@ func (this *DocumentController) Upload() {
 	os.MkdirAll(path, os.ModePerm)
 
 	err = this.SaveToFile(name, filePath)
-
 	if err != nil {
 		beego.Error("SaveToFile => ", err)
 		this.JsonResult(6005, "保存文件失败")
